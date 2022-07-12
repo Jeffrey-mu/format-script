@@ -27,7 +27,7 @@ const newValue = computed(() => {
   })
   return newData.filter(item => item.script)
 })
-enum type {
+enum TypeName {
   dp = '详情',
   hp = '首页',
   anchor = '底部悬浮',
@@ -38,14 +38,14 @@ const DP = 'dp'
 const ANCHOR = 'anchor'
 function formatTile(title: string) {
   const array = title.split('_')
-  return `${array.find(el => el === DP) ? type.dp : type.hp}_${formatType(array)}`
+  return `${array.find(el => el === DP) ? TypeName.dp : TypeName.hp}_${formatType(array)}`
 }
 function formatType(array: string[]): string {
   const str = []
   if (array.at(-2) === ANCHOR)
-    str.push(type.anchor)
-  if (array.includes(type.cp))
-    str.push(type.cpt)
+    str.push(TypeName.anchor)
+  if (array.includes(TypeName.cp))
+    str.push(TypeName.cpt)
   str.push(array.at(-1))
   return `${str.join('_')}`
 }
