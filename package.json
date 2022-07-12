@@ -36,6 +36,7 @@
     "cypress": "^10.3.0",
     "eslint": "^8.18.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "html-format": "^1.0.1",
     "https-localhost": "^4.7.1",
     "markdown-it-link-attributes": "^4.0.0",
     "markdown-it-prism": "^2.2.4",

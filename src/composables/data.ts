@@ -1,14 +1,4 @@
----
-title: About
----
-
-### 关于广告代码格式化说明
-
-读取txt文本 通过广告类型格式化广告代码
-
-```txt
-
-www.oppitnews.com_DV360_0712_300x250_dp_normal_1
+export const data = `www.oppitnews.com_DV360_0712_300x250_dp_normal_1
 <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 <script>
   window.googletag = window.googletag || {cmd: []};
@@ -138,5 +128,4 @@ www.oppitnews.com_DV360_0712_320x480_1
   <script>
     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1657616114975-0'); });
   </script>
-</div>
-```
+</div>`
