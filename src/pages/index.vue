@@ -1,8 +1,11 @@
 <script setup lang="ts">
 const input = ref('')
 const newValue = computed(() => {
+  if (!input.value)
+    return ''
+  debugger
   const reg = /www.*?_[0-9]\r/g
-  const tab = input.value.match(reg).map(el => el.replace('\r', ''))
+  const tab = input.value.match(reg).map(el => el.replace('\n', ''))
   const array = input.value.replaceAll('\r', '').split('\n').filter(Boolean)
   console.log(tab)
   console.log(array)
@@ -31,6 +34,7 @@ const newValue = computed(() => {
   <div>
     <!-- <input id="" type="file" name=""> -->
     <textarea v-model="input" name="" cols="30" rows="10" w100vh border />
+    <p>{{ newValue }}</p>
   </div>
 </template>
 
