@@ -1,58 +1,36 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
-
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
-
-const { t } = useI18n()
+const input = ref('')
+const newValue = computed(() => {
+  const reg = /www.*?_[0-9]\r/g
+  const tab = input.value.match(reg).map(el => el.replace('\r', ''))
+  const array = input.value.replaceAll('\r', '').split('\n').filter(Boolean)
+  console.log(tab)
+  console.log(array)
+  const newData = []
+  const idnexs = tab.map((el) => {
+    return array.findIndex(item => item == el)
+  })
+  console.log(idnexs)
+  idnexs.reduce((acc, idnex) => {
+    newData.push({
+      name: array[acc],
+      script: array.slice(acc + 1, idnex).join(''),
+    })
+    return acc = idnex
+  }, 0)
+  const len = idnexs.length
+  newData.push({
+    name: array[idnexs[len - 1]],
+    script: array.slice(idnexs[len - 1]).join(''),
+  })
+  return newData.filter(item => item.script)
+})
 </script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
-
-    <div py-4 />
-
-    <input
-      id="input"
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      :aria-label="t('intro.whats-your-name')"
-      type="text"
-      autocomplete="false"
-      p="x4 y2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    >
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
-      >
-        {{ t('button.go') }}
-      </button>
-    </div>
+    <!-- <input id="" type="file" name=""> -->
+    <textarea v-model="input" name="" cols="30" rows="10" w100vh border />
   </div>
 </template>
 
