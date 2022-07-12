@@ -2,6 +2,7 @@
 import format from 'html-format'
 import { data } from '~/composables/data'
 const input = ref(data)
+const copyIndex = ref(-1)
 const newValue = computed(() => {
   if (!input.value)
     return ''
@@ -54,17 +55,40 @@ function formatScript(script: string) {
 
   return format(script)
 }
+function copy(script: string, index: number) {
+  const aux = document.createElement('input')
+
+  // 设置元素内容
+  aux.setAttribute('value', script)
+
+  // 将元素插入页面进行调用
+  document.body.appendChild(aux)
+
+  // 复制内容
+  aux.select()
+
+  // 将内容复制到剪贴板
+  document.execCommand('copy')
+
+  // 删除创建元素
+  document.body.removeChild(aux)
+
+  // 提示
+  copyIndex.value = index
+}
 </script>
 
 <template>
   <div flex="~ ">
-    <!-- <input id="" type="file" name=""> -->
     <textarea v-model="input" name="" cols="30" rows="10" p-xy w100vh border b-rd />
     <div flex="1" ml1 :class="[newValue ? '' : 'border']">
       <ul>
         <li v-for="item, index in newValue" :key="index" border mb4 pxy b-rd>
-          <h2 text-left font-600 color-green>
-            {{ formatTile(item.title) }}
+          <h2 text-left font-600>
+            <span color-green>{{ formatTile(item.title) }}</span>
+            <div class="icon-btn mx-2" float-right title="copy">
+              <div i-carbon-copy :class="[index === copyIndex ? 'color-green' : '']" @click="copy(item.script, index)" />
+            </div>
           </h2>
           <p>{{ formatScript(item.script) }}</p>
         </li>
