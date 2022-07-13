@@ -87,7 +87,7 @@ function copy(script: string, index: number) {
               <div i-carbon-copy :class="[index === copyIndex ? 'color-green' : '']" @click="copy(item.script, index)" />
             </div>
           </h2>
-          <p hover="color-red/700 font-600" dark:hover="color-yellow/700 font-600">
+          <p hover="color-red/700 font-600" dark:hover="color-yellow/700 font-600" :class="[index === copyIndex ? 'color-blue' : '']">
             {{ item.script }}
           </p>
         </li>
