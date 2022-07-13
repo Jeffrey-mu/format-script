@@ -80,14 +80,16 @@ function copy(script: string, index: number) {
     <textarea v-model="input" name="" cols="30" rows="10" p-xy w100vh border b-rd />
     <div flex="1" ml1 :class="[newValue ? '' : 'border']">
       <ul>
-        <li v-for="item, index in newValue" :key="index" border mb4 pxy b-rd>
+        <li v-for="item, index in newValue" :key="index" border mb4 pxy b-rd hover="bg-#CDF0EA/700" dark:hover="bg-#111/700">
           <h2 text-left font-600>
-            <span color-blue>{{ index + 1 }}：</span><span color-green>{{ formatTile(item.title) }}</span>
+            <span bg="#FFF89A" dark:color-black border inline-block w-7 h-7 b-rd-7 lh-7 mr-2 font-600 text-center>{{ index + 1 }}</span><span color-green>{{ formatTile(item.title) }}</span>
             <div class="icon-btn mx-2" float-right title="copy">
               <div i-carbon-copy :class="[index === copyIndex ? 'color-green' : '']" @click="copy(item.script, index)" />
             </div>
           </h2>
-          <p>{{ item.script }}</p>
+          <p hover="color-red/700 font-600" dark:hover="color-yellow/700 font-600">
+            {{ item.script }}
+          </p>
         </li>
       </ul>
     </div>
