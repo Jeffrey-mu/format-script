@@ -17,6 +17,8 @@ const newValue = computed(() => {
   const titleReg = /www.*?_[0-9]\n/g
   const scriptReg = /<script\b[^>]*><\/script>/
   const tab: string[] = input.value.toString().match(titleReg)
+  if (!tab)
+    return ''
   // .map(el => el.replace('\n', ''))
   const array = input.value.toString().split('\n').filter(Boolean)
   const newData: { title: string; script: string }[] = []
