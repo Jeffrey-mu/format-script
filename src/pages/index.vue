@@ -14,7 +14,7 @@ const copyIndex = ref(-1)
 const newValue = computed(() => {
   if (!input.value)
     return ''
-  const titleReg = /www.*?_[0-9]\n/g
+  const titleReg = /www.*?[0-9]\n/g
   const scriptReg = /<script\b[^>]*><\/script>/
   const tab: string[] = input.value.toString().match(titleReg)
   if (!tab)
